@@ -4,10 +4,10 @@
 ## Obiettivo
 Creazione piattaforma per l'apprendimento online: questa parte di progetto riguarda la gestione dei corsi.
 
----
 ## Funzionamento
 Questo progetto è stato sviluppato utilizzando delle classi scritte in php, le analizzeremo insieme ad alcuni pezzi di codice che le utilizzano:
 ### Database.php
+Questa è una classe astratta, ovvero una classe che può essere ereditata da altre classi e ha come scopo quello di collegarsi al db. 
 ```php
 <?php
 /**
@@ -49,11 +49,11 @@ abstract class Database
      * @access public
      */
     public function __construct()
-    {
+    { 	//Credenziali da inserire
         $this->username = "";
         $this->username = "";
         $this->password = "";
-        $this->dbname = "my_bog27";
+        $this->dbname = "";
     }
     /**
      * Metodo per la connesione al DB
@@ -70,7 +70,7 @@ abstract class Database
         {
             throw new Exception($this->conn->connect_error);
         }
-		$this->conn->set_charset("utf8");
+	$this->conn->set_charset("utf8");
         return $this->conn;
     }
 
