@@ -1,6 +1,7 @@
 # E-Learn
 ---
-
+## Obiettivo
+Creazione piattaforma per l'apprendimento online, parte gestione corsi.
 
 ---
 ## Function Points
