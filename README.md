@@ -710,7 +710,30 @@ class Corso extends Database
 }
 ?>
 ```
-
+Esempio di utilizzo della classe Corso.
+File : /Corsi/Crea.php
+```php
+session_start();
+if (!isset($_SESSION['Utente']))
+	header("url= http://bog27.altervista.org/E-Learn");
+require_once ('./../Classi/Utente.php');
+require_once ('./../Classi/Corso.php');
+//print_r($_SESSION['part']);
+$nome=trim($_POST['nome']);
+$descrizione=trim($_POST['descrizione']);
+if (isset($_SESSION['Utente']) && isset($nome) && isset($descrizione) && isset($_POST['contI']) && isset($_POST['contS']) && $_POST['contI']>=0 && $_POST['contS']>=0 && isset($_SESSION['part']))
+{
+	//insegnante2@admin.it
+	//ricava l'oggetto passato tramite sessione
+	$Utente = Utente::parseJsonToUtente($_SESSION['Utente']);
+	//print_r($Utente);
+	//(Utente) $Utente->existId();
+	try
+	{
+		$corso = new Corso($_POST['nome'], $_POST['descrizione'], $Utente);
+		$idCorso = $corso ->insertCorso();
+		...
+```
 ### Post.php
 Questa classe permette la gestione dei post e il loro inserimento nel database. 
 ```php
