@@ -473,6 +473,39 @@ class Utente extends Database
 
 ?>
 ```
+Esempio di utilizzo della classe Utente.
+File : /Autenticazione/Accedi.php
+```php
+ session_start();
+require_once ('./../Classi/Utente.php');
+
+//print_r($_POST); 
+if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['tipo']))
+{
+	try
+	{
+	    $Utente = new Utente($_POST['email'], $_POST['password'], $_POST['tipo']);
+	}
+	catch (Exception $e)
+	{
+	    echo 'Caught exception: ',  $e->getMessage(), "\n";
+	    die();
+	}
+
+	if ($Utente->accedi())
+	{
+	    // passa l'oggetto alla sessione
+	    $_SESSION['Utente'] = $Utente->parseUtenteToJson();
+	    header('Location: ./../Home.php');
+	}
+	else
+	{
+	    echo "<h4 style='text-align:center'>Password o email errate</h4>";
+	    header("Refresh:2.5; url= http://bog27.altervista.org/E-Learn");
+	    //echo "<script> alert('Password o email errate'); </script>";
+	}
+	...
+```
 
 ### Query.php
 Questa classe viene utilizzata per effettuare query tramite Ajax.
