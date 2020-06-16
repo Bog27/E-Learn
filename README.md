@@ -866,7 +866,32 @@ class Post extends Database
 }
 ?>
 ```
-
+Esempio di utilizzo della classe Corso.
+File : /Corsi/corso.php
+```php
+$p=new Post("a","a",NULL);
+$res = $p->selectIdPost($id);
+//print_r($res);
+foreach ($res as $r)
+{
+	$i=$r['IdPost'];
+	$temp=$p->selectPost($i);
+	echo '<div style="height: auto; background-color: #f0ffff; border: 1px solid black; margin-top:20px">
+	<p style="font-size: 40px; bottom: 0px;">'
+	.$temp[0]['Titolo'].
+	'</p>
+	<p style="font-size: 25px; bottom: 0px;">'
+	.$temp[0]['Corpo'].'
+	</p>';
+	if ($temp[0]['nomeFile']!=NULL)
+	{
+		echo '
+		<p style="font-size: 25px; bottom: 0px;">
+		<a href="./'.$temp[0]['nomeFile'].'" download>Scarica '.$temp[0]['nomeFile'].'</a></p>';
+	}
+	echo '</div>';
+}
+```
 ---
 ## Function Points
 
